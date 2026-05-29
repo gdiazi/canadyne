@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ScaleBOSS 3D – Canadyne Equipment and Services</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #F4A700;
+      --secondary: #1A3A6B;
+      --dark: #0D1B2A;
+      --gray: #4A5568;
+      --light-gray: #F7F8FA;
+      --danger-stripe: repeating-linear-gradient(
+        -45deg,
+        #F4A700,
+        #F4A700 12px,
+        #1A1A1A 12px,
+        #1A1A1A 24px
+      );
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      background: #fff;
+      color: #1A1A1A;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, h5, .display-font {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    /* ─── NAVBAR ─── */
+    .navbar {
+      background: var(--dark);
+      border-bottom: 3px solid var(--primary);
+      padding: 0.6rem 0;
+    }
+    .navbar-brand img { height: 44px; }
+    .navbar-brand span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 1.4rem;
+      color: #fff;
+      letter-spacing: 0.02em;
+    }
+    .nav-link {
+      color: rgba(255,255,255,0.85) !important;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.5rem 1rem !important;
+      transition: color 0.2s;
+    }
+    .nav-link:hover { color: var(--primary) !important; }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: var(--dark);
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('images/1.png');
+      background-size: cover;
+      background-position: center 30%;
+      opacity: 0.45;
+    }
+    .hero-stripe {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 10px;
+      background: var(--danger-stripe);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      background: var(--primary);
+      color: var(--dark);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      color: #fff;
+      line-height: 0.92;
+      text-transform: uppercase;
+    }
+    .hero h1 span { color: var(--primary); }
+    .hero-sub {
+      color: rgba(255,255,255,0.75);
+      font-size: 1.1rem;
+      max-width: 520px;
+      line-height: 1.6;
+    }
+    .btn-primary-custom {
+      background: var(--primary);
+      color: var(--dark);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 12px 32px;
+      border: none;
+      border-radius: 0;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-primary-custom:hover {
+      background: #fff;
+      color: var(--dark);
+    }
+    .btn-outline-custom {
+      background: transparent;
+      color: #fff;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 10px 30px;
+      border: 2px solid rgba(255,255,255,0.5);
+      border-radius: 0;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-outline-custom:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    .hero-stats {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2.5rem;
+    }
+    .hero-stat .val {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--primary);
+      line-height: 1;
+    }
+    .hero-stat .lbl {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── SECTION TITLES ─── */
+    .section-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      text-transform: uppercase;
+      line-height: 1;
+      color: var(--dark);
+    }
+    .section-title span { color: var(--primary); }
+
+    /* ─── INTRO ─── */
+    .intro-section {
+      padding: 80px 0;
+      background: var(--light-gray);
+    }
+    .intro-img-wrap {
+      position: relative;
+    }
+    .intro-img-wrap img {
+      width: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .intro-img-wrap::before {
+      content: '';
+      position: absolute;
+      top: -12px; left: -12px;
+      right: 12px; bottom: 12px;
+      border: 3px solid var(--primary);
+      z-index: 0;
+      pointer-events: none;
+    }
+    .intro-img-wrap img { position: relative; z-index: 1; }
+
+    /* ─── FEATURES ─── */
+    .features-section {
+      padding: 80px 0;
+      background: var(--dark);
+    }
+    .feature-card {
+      border-left: 3px solid var(--primary);
+      padding: 1rem 1.25rem;
+      background: rgba(255,255,255,0.04);
+      margin-bottom: 0.75rem;
+      transition: background 0.2s;
+    }
+    .feature-card:hover { background: rgba(244,167,0,0.08); }
+    .feature-card h6 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin: 0;
+    }
+
+    /* ─── SPECS DIAGRAM ─── */
+    .specs-section {
+      padding: 80px 0;
+    }
+    .specs-img {
+      width: 100%;
+      border: 2px solid #E2E8F0;
+    }
+    .dim-card {
+      background: var(--dark);
+      color: #fff;
+      padding: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+    .dim-card .key {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.55);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .dim-card .val {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    /* ─── GALLERY ─── */
+    .gallery-section {
+      padding: 80px 0;
+      background: var(--light-gray);
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 280px 280px;
+      gap: 12px;
+    }
+    .gallery-grid .g-main {
+      grid-row: 1 / 3;
+    }
+    .gallery-grid .g-item {
+      overflow: hidden;
+      position: relative;
+    }
+    .gallery-grid .g-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .gallery-grid .g-item:hover img { transform: scale(1.05); }
+    .gallery-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.75));
+      color: #fff;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 1.5rem 1rem 0.75rem;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .gallery-grid .g-item:hover .gallery-label { opacity: 1; }
+
+    /* ─── SPECS TABLE ─── */
+    .specs-table-section {
+      padding: 80px 0;
+      background: var(--dark);
+    }
+    .specs-group {
+      margin-bottom: 2rem;
+    }
+    .specs-group-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--primary);
+      border-bottom: 1px solid rgba(244,167,0,0.3);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .spec-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.45rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .spec-row:last-child { border-bottom: none; }
+    .spec-key {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.6);
+    }
+    .spec-val {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #fff;
+      text-align: right;
+      max-width: 55%;
+    }
+
+    /* ─── OPTIONS ─── */
+    .options-section {
+      padding: 80px 0;
+    }
+    .option-badge {
+      display: inline-block;
+      background: var(--light-gray);
+      border: 1px solid #E2E8F0;
+      color: var(--dark);
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      margin: 4px;
+      border-radius: 0;
+      transition: all 0.2s;
+    }
+    .option-badge:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: var(--dark);
+    }
+
+    /* ─── CONTACT ─── */
+    .contact-section {
+      padding: 80px 0;
+      background: var(--secondary);
+    }
+    .contact-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 2rem;
+    }
+    .contact-card h5 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 1.3rem;
+      text-transform: uppercase;
+      color: var(--primary);
+    }
+    .contact-card p, .contact-card a {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.9rem;
+      text-decoration: none;
+    }
+    .contact-card a:hover { color: var(--primary); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--dark);
+      border-top: 3px solid var(--primary);
+      padding: 1.5rem 0;
+    }
+    footer .brand {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      color: #fff;
+      font-size: 1rem;
+      text-transform: uppercase;
+    }
+    footer small { color: rgba(255,255,255,0.4); font-size: 0.75rem; }
+
+    /* ─── STRIPE DIVIDER ─── */
+    .stripe-divider {
+      height: 8px;
+      background: var(--danger-stripe);
+    }
+
+    /* ─── STICKY CTA ─── */
+    .sticky-cta {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 999;
+    }
+    .sticky-cta a {
+      background: var(--primary);
+      color: var(--dark);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 14px 24px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      transition: all 0.2s;
+    }
+    .sticky-cta a:hover { background: #fff; }
+
+    /* ─── SCROLL ANIMATION ─── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      .hero { min-height: 70vh; }
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: 220px 220px 220px;
+      }
+      .gallery-grid .g-main { grid-row: auto; }
+      .hero-stats { gap: 1.2rem; flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg sticky-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3" href="#">
+      <img src="images/para-web-guill2.png">
+    </a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <i class="bi bi-list text-white fs-4"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
+        <li class="nav-item"><a class="nav-link" href="#intro">Producto</a></li>
+        <li class="nav-item"><a class="nav-link" href="#caracteristicas">Características</a></li>
+        <li class="nav-item"><a class="nav-link" href="#galeria">Galería</a></li>
+        <li class="nav-item"><a class="nav-link" href="#especificaciones">Especificaciones</a></li>
+        <li class="nav-item ms-lg-3">
+          <a href="#contacto" class="btn-primary-custom" style="padding:8px 22px;font-size:0.82rem;">Contacto</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="container hero-content py-5">
+    <div class="row">
+      <div class="col-lg-7">
+        <div class="hero-eyebrow">Minería Subterránea · ScaleBOSS 3D</div>
+        <h1>SCALE<span>BOSS</span><br>3D</h1>
+        <p class="hero-sub mt-3">
+          Desatador de roca de nueva generación para galerías subterráneas. 
+          Pluma de cinco ejes, cabina ROPS/FOPS y tracción hidráulica 4×4 
+          para los ambientes más demandantes.
+        </p>
+        <div class="d-flex gap-3 flex-wrap mt-4">
+          <a href="#especificaciones" class="btn-primary-custom">Ver Especificaciones</a>
+          <a href="#contacto" class="btn-outline-custom">Solicitar Cotización</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="val">214 HP</div>
+            <div class="lbl">Potencia</div>
+          </div>
+          <div class="hero-stat">
+            <div class="val">5 Ejes</div>
+            <div class="lbl">Pluma</div>
+          </div>
+          <div class="hero-stat">
+            <div class="val">16,329 kg</div>
+            <div class="lbl">Peso Operativo</div>
+          </div>
+          <div class="hero-stat">
+            <div class="val">50+ Años</div>
+            <div class="lbl">Experiencia Astec</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-stripe"></div>
+</section>
+
+<!-- INTRO -->
+<section class="intro-section" id="intro">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6 fade-up">
+        <div class="intro-img-wrap">
+          <img src="images/2.png">
+        </div>
+      </div>
+      <div class="col-lg-6 fade-up">
+        <div class="section-label">Acerca del producto</div>
+        <h2 class="section-title">Para condiciones difíciles,<br><span>máquinas resistentes</span></h2>
+        <p class="mt-3 text-secondary lh-lg">
+          Durante más de cincuenta años, Astec ha trabajado para hacer evolucionar la industria minera, 
+          a través de máquinas innovadoras construidas para ambientes demandantes. Y no hay trabajo más 
+          demandante que la limpieza mecánica de galerías subterráneas.
+        </p>
+        <p class="text-secondary lh-lg">
+          El nuevo <strong>ScaleBOSS 3D</strong> entrega confiabilidad y seguridad mejorada para 
+          ambientes subterráneos, manteniéndose un paso adelante. Su construcción compacta y resistente 
+          facilita la operación, incluso en las condiciones más difíciles.
+        </p>
+        <div class="mt-4 d-flex gap-4">
+          <div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:2rem;font-weight:900;color:var(--secondary);">3×3</div>
+            <div style="font-size:0.78rem;color:var(--gray);text-transform:uppercase;letter-spacing:.05em;">Galería mínima (m)</div>
+          </div>
+          <div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:2rem;font-weight:900;color:var(--secondary);">±45°</div>
+            <div style="font-size:0.78rem;color:var(--gray);text-transform:uppercase;letter-spacing:.05em;">Articulación vehículo</div>
+          </div>
+          <div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:2rem;font-weight:900;color:var(--secondary);">4×4</div>
+            <div style="font-size:0.78rem;color:var(--gray);text-transform:uppercase;letter-spacing:.05em;">Tracción hidráulica</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stripe-divider"></div>
+
+<!-- CARACTERÍSTICAS -->
+<section class="features-section" id="caracteristicas">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-5 fade-up">
+        <div class="section-label" style="color:rgba(244,167,0,0.7)">Equipamiento</div>
+        <h2 class="section-title" style="color:#fff;">Características<br><span>Técnicas</span></h2>
+        <p class="mt-3" style="color:rgba(255,255,255,0.6);line-height:1.7;">
+          El ScaleBOSS 3D combina construcción robusta con tecnología de control de última 
+          generación, minimizando emisiones y maximizando el rendimiento operativo.
+        </p>
+        <div class="mt-4">
+          <img src="images/3.png" style="width: 100%;">
+          
+        </div>
+      </div>
+      <div class="col-lg-7 fade-up">
+        <div class="feature-card"><h6><i class="bi bi-check-circle-fill text-warning me-2"></i>Construcción compacta y resistente — galerías 3×3 a 5½×5½</h6></div>
+        <div class="feature-card"><h6><i class="bi bi-check-circle-fill text-warning me-2"></i>Pluma de cinco ejes para excelente capacidad de maniobra</h6></div>
+        <div class="feature-card"><h6><i class="bi bi-check-circle-fill text-warning me-2"></i>Motor Deutz TCD6.1 EDG de alta potencia y confiabilidad</h6></div>
+        <div class="feature-card"><h6><i class="bi bi-check-circle-fill text-warning me-2"></i>Articulación con rodamiento esférico de larga vida</h6></div>
+        <div class="feature-card"><h6><i class="bi bi-check-circle-fill text-warning me-2"></i>Tracción Hidráulica de Lazo Cerrado 4×4 con control de tracción</h6></div>
+        <div class="feature-card"><h6><i class="bi bi-check-circle-fill text-warning me-2"></i>Frenos SAHR en cada motor de tracción hidráulica</h6></div>
+        <div class="feature-card"><h6><i class="bi bi-check-circle-fill text-warning me-2"></i>Circuito eléctrico 24Vdc / 80A con control electro-hidráulico</h6></div>
+        <div class="feature-card"><h6><i class="bi bi-check-circle-fill text-warning me-2"></i>Cabina ROPS/FOPS con HVAC y amortiguadores de caucho</h6></div>
+        <div class="feature-card"><h6><i class="bi bi-check-circle-fill text-warning me-2"></i>Monitoreo en tiempo real — motor, hidráulico, trayectoria y bitácora</h6></div>
+        <div class="feature-card"><h6><i class="bi bi-check-circle-fill text-warning me-2"></i>Martillo BX10 para desatado de roca (clase 1,000 ft-lb)</h6></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stripe-divider"></div>
+
+<!-- DIMENSIONES -->
+<section class="specs-section" id="dimensiones">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-12 text-center fade-up">
+        <div class="section-label">Dimensiones y alcance</div>
+        <h2 class="section-title">Cobertura Superior<br><span>con Tamaño Reducido</span></h2>
+      </div>
+    </div>
+    <div class="row g-4 align-items-start">
+      <div class="col-lg-8 fade-up">
+        <img src="images/4.png" style="width: 90%;">
+      </div>
+      <div class="col-lg-4 fade-up">
+        <div class="dim-card">
+          <div class="key">Peso Operativo</div>
+          <div class="val">36,000 lbs</div>
+          <small style="color:rgba(255,255,255,0.4);">16,329 kg</small>
+        </div>
+        <div class="dim-card">
+          <div class="key">Largo en Transporte</div>
+          <div class="val">28 ft</div>
+          <small style="color:rgba(255,255,255,0.4);">8.5 m</small>
+        </div>
+        <div class="dim-card">
+          <div class="key">Anchura</div>
+          <div class="val">6'–6"</div>
+          <small style="color:rgba(255,255,255,0.4);">2.0 m</small>
+        </div>
+        <div class="dim-card">
+          <div class="key">Altura en Transporte</div>
+          <div class="val">8'–10"</div>
+          <small style="color:rgba(255,255,255,0.4);">2.7 m</small>
+        </div>
+        <div class="dim-card">
+          <div class="key">Radio de Giro Exterior</div>
+          <div class="val">15'–2"</div>
+          <small style="color:rgba(255,255,255,0.4);">4.6 m</small>
+        </div>
+        <div class="dim-card">
+          <div class="key">Movimiento Lateral Pluma</div>
+          <div class="val">±30°</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERÍA -->
+<section class="gallery-section" id="galeria">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-12 text-center fade-up">
+        <div class="section-label">Imágenes del producto</div>
+        <h2 class="section-title">Galería</h2>
+      </div>
+    </div>
+    <div class="gallery-grid fade-up">
+      <div class="g-item g-main">
+        <img src="images/5.png">
+        <div class="gallery-label">Cabina del Operador</div>
+      </div>
+      <div class="g-item">
+       <img src="images/5.png">
+        <div class="gallery-label">Sistema de Control</div>
+      </div>
+      <div class="g-item">
+        <img src="images/6.png">
+        <div class="gallery-label">Operación Subterránea</div>
+      </div>
+    </div>
+    <div class="gallery-grid mt-3 fade-up" style="grid-template-rows:240px;">
+      <div class="g-item" style="grid-column:1/3;">
+        <img src="images/7.png">
+        <div class="gallery-label">ScaleBOSS 3D en Operación</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ESPECIFICACIONES -->
+<section class="specs-table-section" id="especificaciones">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-12 text-center fade-up">
+        <div class="section-label" style="color:rgba(244,167,0,0.7)">Datos técnicos completos</div>
+        <h2 class="section-title" style="color:#fff;">Especificaciones<br><span>Técnicas</span></h2>
+      </div>
+    </div>
+    <div class="row g-4">
+      <!-- Motor -->
+      <div class="col-lg-4 fade-up">
+        <div class="specs-group">
+          <div class="specs-group-title"><i class="bi bi-gear-fill me-2"></i>Motor</div>
+          <div class="spec-row"><span class="spec-key">Modelo</span><span class="spec-val">DEUTZ TCD6.1 EDG</span></div>
+          <div class="spec-row"><span class="spec-key">Potencia</span><span class="spec-val">160 kW (214 HP) @ 2,300 rpm</span></div>
+          <div class="spec-row"><span class="spec-key">Torque</span><span class="spec-val">384 ft-lbs</span></div>
+          <div class="spec-row"><span class="spec-key">Energía de impacto</span><span class="spec-val">600–1,500 bpm</span></div>
+          <div class="spec-row"><span class="spec-key">Presión hidráulica</span><span class="spec-val">2,000 psi</span></div>
+          <div class="spec-row"><span class="spec-key">Flujo de aceite</span><span class="spec-val">12–24 gpm</span></div>
+          <div class="spec-row"><span class="spec-key">Peso martillo</span><span class="spec-val">735 lbs</span></div>
+        </div>
+        <div class="specs-group">
+          <div class="specs-group-title"><i class="bi bi-arrows-move me-2"></i>Movimiento de Pluma</div>
+          <div class="spec-row"><span class="spec-key">Mov. lateral pluma</span><span class="spec-val">±30°</span></div>
+          <div class="spec-row"><span class="spec-key">Inclinación del martillo</span><span class="spec-val">180°</span></div>
+          <div class="spec-row"><span class="spec-key">Mov. lateral martillo</span><span class="spec-val">±90°</span></div>
+        </div>
+      </div>
+      <!-- Vehículo -->
+      <div class="col-lg-4 fade-up">
+        <div class="specs-group">
+          <div class="specs-group-title"><i class="bi bi-truck me-2"></i>Vehículo</div>
+          <div class="spec-row"><span class="spec-key">Vel. en terreno plano</span><span class="spec-val">14 mph</span></div>
+          <div class="spec-row"><span class="spec-key">Vel. en pendiente 1:7</span><span class="spec-val">5 mph</span></div>
+          <div class="spec-row"><span class="spec-key">Articulación</span><span class="spec-val">±45°</span></div>
+          <div class="spec-row"><span class="spec-key">Oscilación de eje</span><span class="spec-val">±8°</span></div>
+          <div class="spec-row"><span class="spec-key">Tracción</span><span class="spec-val">4×4 Hidráulica</span></div>
+          <div class="spec-row"><span class="spec-key">Neumáticos</span><span class="spec-val">12.00 R20</span></div>
+          <div class="spec-row"><span class="spec-key">Frenos de servicio</span><span class="spec-val">Hidrodinámicos</span></div>
+          <div class="spec-row"><span class="spec-key">Freno de emergencia</span><span class="spec-val">SAHR</span></div>
+          <div class="spec-row"><span class="spec-key">Tanque de combustible</span><span class="spec-val">50 gal</span></div>
+          <div class="spec-row"><span class="spec-key">Extintor</span><span class="spec-val">20 lb</span></div>
+        </div>
+      </div>
+      <!-- Hidráulicos y Eléctrico -->
+      <div class="col-lg-4 fade-up">
+        <div class="specs-group">
+          <div class="specs-group-title"><i class="bi bi-droplet-fill me-2"></i>Sistemas Hidráulicos</div>
+          <div class="spec-row"><span class="spec-key">Bombas hidráulicas</span><span class="spec-val">2 variables + 1 fijo</span></div>
+          <div class="spec-row"><span class="spec-key">Presión de propulsión</span><span class="spec-val">6,175 psi</span></div>
+          <div class="spec-row"><span class="spec-key">Presión dirección/pluma</span><span class="spec-val">3,400 psi</span></div>
+          <div class="spec-row"><span class="spec-key">Presión martillo</span><span class="spec-val">2,700 psi</span></div>
+          <div class="spec-row"><span class="spec-key">Reserva propulsión</span><span class="spec-val">30 gal</span></div>
+          <div class="spec-row"><span class="spec-key">Reserva dirección/pluma</span><span class="spec-val">35 gal</span></div>
+          <div class="spec-row"><span class="spec-key">Reserva martillo</span><span class="spec-val">23 gal</span></div>
+          <div class="spec-row"><span class="spec-key">Filtración</span><span class="spec-val">10 micron</span></div>
+        </div>
+        <div class="specs-group">
+          <div class="specs-group-title"><i class="bi bi-lightning-charge-fill me-2"></i>Sistema Eléctrico</div>
+          <div class="spec-row"><span class="spec-key">Alternador</span><span class="spec-val">24 Vdc 80 amp</span></div>
+          <div class="spec-row"><span class="spec-key">Baterías</span><span class="spec-val">2 × 195 Ah 12V</span></div>
+          <div class="spec-row"><span class="spec-key">Control</span><span class="spec-val">CANBus electrónico</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPCIONES -->
+<section class="options-section" id="opciones">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 fade-up">
+        <div class="section-label">Personalización</div>
+        <h2 class="section-title">Opciones<br><span>Disponibles</span></h2>
+        <p class="text-secondary mt-3">Configure su ScaleBOSS 3D según las necesidades específicas de su operación minera.</p>
+      </div>
+      <div class="col-lg-8 fade-up d-flex flex-wrap align-content-center">
+        <span class="option-badge"><i class="bi bi-plus me-1"></i>Hoja de empuje</span>
+        <span class="option-badge"><i class="bi bi-plus me-1"></i>Lubricación automática con soplado de aire</span>
+        <span class="option-badge"><i class="bi bi-plus me-1"></i>Lubricación automática para pluma</span>
+        <span class="option-badge"><i class="bi bi-plus me-1"></i>Sistema de control de polvo</span>
+        <span class="option-badge"><i class="bi bi-plus me-1"></i>Sistema de control de incendios</span>
+        <span class="option-badge"><i class="bi bi-plus me-1"></i>Liberación de freno de mano</span>
+        <span class="option-badge"><i class="bi bi-plus me-1"></i>Control remoto vía radio</span>
+        <span class="option-badge"><i class="bi bi-plus me-1"></i>Martillo de desatado BsX10SB</span>
+        <span class="option-badge"><i class="bi bi-plus me-1"></i>Sistema de estéreo</span>
+        <span class="option-badge"><i class="bi bi-plus me-1"></i>Kit para altura geográfica</span>
+        <span class="option-badge"><i class="bi bi-plus me-1"></i>Recubrimiento de escape y manifold</span>
+        <span class="option-badge"><i class="bi bi-plus me-1"></i>Abastecimiento rápido de combustible</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stripe-divider"></div>
+
+<!-- CONTACTO -->
+<section class="contact-section" id="contacto">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-12 text-center fade-up">
+        <div class="section-label" style="color:rgba(244,167,0,0.7)">Representante oficial</div>
+        <h2 class="section-title" style="color:#fff;">Contacto &<br><span>Cotizaciones</span></h2>
+      </div>
+    </div>
+    <div class="row g-4 justify-content-center">
+      <div class="col-lg-5 fade-up">
+        <div class="contact-card h-100">
+          <h5><i class="bi bi-building me-2"></i>Canadyne S.A.</h5>
+          <p class="mt-3"><i class="bi bi-geo-alt me-2" style="color:var(--primary)"></i>Av. Los Cisnes Mz I2 Lote 16A - Urb. El Club 2da Etapa - Huachipa, Lurigancho</p>
+          <p><i class="bi bi-envelope me-2" style="color:var(--primary)"></i><a href="mailto:ventas@canadynesa.com">ventas@canadynesa.com</a></p>
+          <p><i class="bi bi-globe me-2" style="color:var(--primary)"></i><a href="http://www.canadynesa.com" target="_blank">www.canadynesa.com</a></p>
+          <div class="mt-3 d-flex gap-3">
+            <a href="#" style="color:rgba(255,255,255,0.5);font-size:1.4rem;"><i class="bi bi-linkedin"></i></a>
+            <a href="#" style="color:rgba(255,255,255,0.5);font-size:1.4rem;"><i class="bi bi-twitter-x"></i></a>
+            <a href="#" style="color:rgba(255,255,255,0.5);font-size:1.4rem;"><i class="bi bi-facebook"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5 fade-up">
+        <div class="contact-card h-100">
+          <h5><i class="bi bi-tools me-2"></i>Astec Industries, INC.</h5>
+          <p class="mt-3"><i class="bi bi-geo-alt me-2" style="color:var(--primary)"></i>1725 Shepherd Road, Chattanooga, TN 37421</p>
+          <p><i class="bi bi-telephone me-2" style="color:var(--primary)"></i>(519) 599-2015</p>
+          <p><i class="bi bi-globe me-2" style="color:var(--primary)"></i><a href="http://www.astecindustries.com" target="_blank">www.astecindustries.com</a></p>
+          <div class="mt-4">
+            <img src="images/para-web-guill2.png" style="width: 100%;">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div>
+      <div class="brand">Canadyne Equipment & Services S.A.</div>
+      <small>Representante oficial Astec Industries · Perú</small>
+    </div>
+    <small style="color:rgba(255,255,255,0.3);">ScaleBOSS 3D · Minería Subterránea · © 2026</small>
+  </div>
+</footer>
+
+<!-- STICKY CTA -->
+<div class="sticky-cta">
+  <a href="mailto:ventas@canadynesa.com">
+    <i class="bi bi-envelope-fill"></i>Solicitar Cotización
+  </a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Scroll animation
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
